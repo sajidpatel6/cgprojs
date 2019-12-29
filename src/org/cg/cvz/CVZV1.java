@@ -1,14 +1,12 @@
 package org.cg.cvz;
 
-//public class CVZV1 {
-//
-//}
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class CVZV1 {
+// Score: 50630 Rank: 1265/5491
+//class Player {
+  class CVZV1 {
 
    static class Ash extends Human {
       Ash(int x, int y) {
@@ -67,43 +65,45 @@ class CVZV1 {
       }
    }
 
-   private static final int ASH_RANGE = 1990;
+	private static final int ASH_RANGE = 1999;
+	private static final int ASH_SPEED = 999;
+	private static final int ZOMBIE_SPEED = 401;
 
-   private static Point findFarthestHuman(List<Zombie> zombies, List<Human> humans) {
-      double farthest = Integer.MIN_VALUE;
-      Point farthestPoint = null;
+//   private static Point findFarthestHuman(List<Zombie> zombies, List<Human> humans) {
+//      double farthest = Integer.MIN_VALUE;
+//      Point farthestPoint = null;
+//
+//      for (Zombie zombie : zombies) {
+//         double nearest = Integer.MAX_VALUE;
+//         Human humanN = null;
+//         for (Human human : humans) {
+//            if (nearest > zombie.distance(human)) {
+//               nearest = zombie.distance(human);
+//               humanN = human;
+//            }
+//         }
+//         if (farthest < nearest) {
+//            farthest = nearest;
+//            farthestPoint = new Point(humanN.x, humanN.y);
+//         }
+//      }
+//      return farthestPoint;
+//   }
 
-      for (Zombie zombie : zombies) {
-         double nearest = Integer.MAX_VALUE;
-         Human humanN = null;
-         for (Human human : humans) {
-            if (nearest > zombie.distance(human)) {
-               nearest = zombie.distance(human);
-               humanN = human;
-            }
-         }
-         if (farthest < nearest) {
-            farthest = nearest;
-            farthestPoint = new Point(humanN.x, humanN.y);
-         }
-      }
-      return farthestPoint;
-   }
-
-   private static Point findNearestHuman(Ash ash, List<Human> humans, List<Zombie> zombies) {
-      double nearest = Integer.MAX_VALUE;
-      Point nearestPoint = null;
-
-      for (Human human : humans) {
-         Zombie zombie = findNearestZombie(human, zombies);
-         double factor = ash.distance(human) / zombie.distance(human);
-         if (nearest > factor) {
-            nearest = factor;
-            nearestPoint = new Point(human.x, human.y);
-         }
-      }
-      return nearestPoint;
-   }
+//   private static Point findNearestHuman(Ash ash, List<Human> humans, List<Zombie> zombies) {
+//      double nearest = Integer.MAX_VALUE;
+//      Point nearestPoint = null;
+//
+//      for (Human human : humans) {
+//         Zombie zombie = findNearestZombie(human, zombies);
+//         double factor = ash.distance(human) / zombie.distance(human);
+//         if (nearest > factor) {
+//            nearest = factor;
+//            nearestPoint = new Point(human.x, human.y);
+//         }
+//      }
+//      return nearestPoint;
+//   }
 
    private static Zombie findNearestZombie(Human human, List<Zombie> zombies) {
       double nearest = Integer.MAX_VALUE;
@@ -119,24 +119,24 @@ class CVZV1 {
       return nearestZombie;
    }
 
-   private static Point findNearestZombies(Ash ash, Point targetPoint, List<Zombie> zombies) {
-      double nearest = Integer.MAX_VALUE;
-      Point nearestPoint = null;
-      if (targetPoint != null) {
-         for (Zombie zombie : zombies) {
-            Point newPoint = targetPoint.midWay(zombie, ASH_RANGE / targetPoint.distance(zombie));
-            System.err.println("dist: " + targetPoint.distance(zombie));
-            System.err.println("new: " + newPoint.x + " " + newPoint.y);
-
-            if (nearest > newPoint.distance(ash)) {
-               nearest = newPoint.distance(ash);
-               nearestPoint = newPoint;
-            }
-         }
-      }
-      System.err.println("near: " + nearestPoint.x + " " + nearestPoint.y);
-      return nearestPoint;
-   }
+//   private static Point findNearestZombies(Ash ash, Point targetPoint, List<Zombie> zombies) {
+//      double nearest = Integer.MAX_VALUE;
+//      Point nearestPoint = null;
+//      if (targetPoint != null) {
+//         for (Zombie zombie : zombies) {
+//            Point newPoint = targetPoint.midWay(zombie, ASH_RANGE / targetPoint.distance(zombie));
+////            System.err.println("dist: " + targetPoint.distance(zombie));
+////            System.err.println("new: " + newPoint.x + " " + newPoint.y);
+//
+//            if (nearest > newPoint.distance(ash)) {
+//               nearest = newPoint.distance(ash);
+//               nearestPoint = newPoint;
+//            }
+//         }
+//      }
+////      System.err.println("near: " + nearestPoint.x + " " + nearestPoint.y);
+//      return nearestPoint;
+//   }
 
    public static void main(final String args[]) {
       final Scanner in = new Scanner(System.in);
@@ -147,7 +147,7 @@ class CVZV1 {
          Ash ash = new Ash(x, y);
 
          final int humanCount = in.nextInt();
-         final boolean target = false;
+//         final boolean target = false;
          List<Human> humans = new ArrayList<>();
          for (int i = 0; i < humanCount; i++) {
             final int humanId = in.nextInt();
@@ -171,18 +171,48 @@ class CVZV1 {
             // + " YNext:" + zombieYNext);
          }
 
-         Point targetPoint1 = findNearestHuman(ash, humans, zombies);
-         // // Point targetPoint = findFarthestHuman(zombies, humans);
-         // System.err.println("tx:" + targetPoint1.x + " ty:" + targetPoint1.y);
-          Point targetPoint = findNearestZombies(ash, targetPoint1, zombies);
-        //  Point targetPoint = findNearestZombie(ash, zombies);
-         if (targetPoint == null) {
-            targetPoint = targetPoint1;
-         }
-         System.err.println("tx:" + targetPoint.x + " ty:" + targetPoint.y);
+//         Point targetPoint1 = findNearestHuman(ash, humans, zombies);
+//         // // Point targetPoint = findFarthestHuman(zombies, humans);
+//         // System.err.println("tx:" + targetPoint1.x + " ty:" + targetPoint1.y);
+//          Point targetPoint = findNearestZombies(ash, targetPoint1, zombies);
+//        //  Point targetPoint = findNearestZombie(ash, zombies);
+//         if (targetPoint == null) {
+//            targetPoint = targetPoint1;
+//         }
+         Point targetPoint = findHumansAtRisk(ash, humans, zombies);
+//         System.err.println("tx:" + targetPoint.x + " ty:" + targetPoint.y);
 
          System.out.println(targetPoint.x + " " + targetPoint.y);
          targetPoint = null;
       }
    }
+   
+	private static Point findHumansAtRisk(Ash ash, List<Human> humans, List<Zombie> zombies) {
+		double nearest = Integer.MAX_VALUE;
+//		double farthest = Integer.MIN_VALUE;
+		Point poi = null;
+
+		for (Human human : humans) {
+			Zombie zombie = findNearestZombie(human, zombies);
+//       double factor = ash.distance(human) / ;
+			double stepsZ2H = Math.ceil(zombie.distance(human) / ZOMBIE_SPEED);
+			double stepsA2H = Math.floor(ash.distance(human) / ASH_SPEED);
+//			System.err.println("Human: " + human.x + ", " + human.y + " Zombie: " + zombie.x + ", " + zombie.y);
+//            System.err.println("stepsZ2H: " + stepsZ2H + " stepsA2H: " + stepsA2H);
+            
+            if (poi == null) {
+                // nearest = (stepsZ2H - stepsA2H);
+                poi = new Point(human.x, human.y);
+            }
+            
+			if (nearest > (stepsZ2H - stepsA2H) && (stepsA2H <= stepsZ2H)) {
+            // if (farthest < (stepsZ2H - stepsA2H) && (stepsA2H <= stepsZ2H)) {
+				nearest = (stepsZ2H - stepsA2H);
+				// poi = new Point(human.x, human.y);
+				poi = new Point(zombie.x, zombie.y);
+//				System.err.println("nearestPoint: " + poi.x + ", " + poi.y);
+			}
+		}
+		return poi;
+	}
 }
